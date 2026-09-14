@@ -1,0 +1,3 @@
+source_caption: A triangle being struck from the right.
+target_caption: A triangle being struck from the right and a toy train moving from the front.
+edit_instruction: Add a toy train moving from the front.

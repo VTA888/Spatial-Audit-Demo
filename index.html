@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spatial-Audit Audio Editing Demo</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, sans-serif; }
+    body { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 4rem; color: #17202a; line-height: 1.5; }
+    h1 { margin-bottom: .3rem; }
+    h2 { margin-top: 2.4rem; border-bottom: 1px solid #d9e2ec; padding-bottom: .35rem; }
+    h3 { margin-top: 1.8rem; }
+    .lead { font-size: 1.08rem; color: #52606d; }
+    .notice { background: #f0f4f8; border-left: 4px solid #3e7cb1; padding: .8rem 1rem; }
+    .case { border: 1px solid #d9e2ec; border-radius: 8px; margin: 1rem 0; padding: 1rem; }
+    .case h3 { margin-top: 0; }
+    .caption { background: #f7f9fb; padding: .7rem; border-radius: 5px; }
+    .audio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: .75rem; }
+    .audio-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: .65rem; }
+    .audio-card strong { display: block; margin-bottom: .35rem; }
+    audio { width: 100%; }
+    code { background: #f1f5f9; padding: .1rem .25rem; border-radius: 3px; }
+    a { color: #1769aa; }
+  </style>
+</head>
+<body>
+  <h1>Spatial-Audit Audio Editing Demo</h1>
+  <p class="lead">Qualitative examples for spatial-semantic audio editing with a spatially adapted TangoFlux backbone and training-free FlowEdit.</p>
+  <p class="notice">Use headphones. All examples are 10-second binaural clips. Captions describe locations with phrases such as <code>from the left</code>, <code>from the front</code>, and <code>from the right</code>.</p>
+
+  <h2>Evaluation settings</h2>
+  <p>This demo addresses three evaluation settings described in the revised manuscript: synthetic HRTF in-domain data, independent real-world MRSAudio recordings, and randomized temporal overlap conditions.</p>
+
+  <h2>1. In-domain HRTF data</h2>
+  <p>Each case includes the source, target/reference, Spatial-Audit, AudioEditor, MMEdit, and SmartDJ outputs.</p>
+  <div id="hrtf"></div>
+
+  <h2>2. Real-world MRSAudio</h2>
+  <p>These single-source binaural recordings are independent of the AudioCaps/HRTF synthesis pipeline. They evaluate spatial addition without a synthetic ground-truth target.</p>
+  <div id="mrsaudio"></div>
+
+  <h2>3. Diverse temporal overlap</h2>
+  <p>These examples use randomized event onset times and overlap durations. The replacement example contains approximately 3.2–7.7 seconds of source-event overlap, and the removal example approximately 0.8–8.2 seconds.</p>
+  <div id="overlap"></div>
+
+  <h2>Notes</h2>
+  <ul>
+    <li>Spatial-Audit editing is training-free and uses source/target spatial-semantic captions.</li>
+    <li>SmartDJ prompts explicitly include the edited event direction.</li>
+    <li>Real-recorded examples have no synthetic target; listen to Spatial-Audit and SmartDJ directly.</li>
+  </ul>
+  <p><a href="README.md">Open the full GitHub-readable demo documentation</a></p>
+
+  <script>
+    const hrtfCases = [
+      ['Clock + woman speaking', 'add_s_45204', 'add', 'A clock ticking from the right.', 'A clock ticking from the right and a woman speaking from the left.', 'Add a woman speaking from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
+      ['River + goats', 'add_s_80581', 'add', 'A fast-flowing river from the right.', 'A fast-flowing river from the right and several goats bleating from the left.', 'Add several goats bleating from the left.', [['Source','source.wav'],['Target / reference','ground_truth.wav'],['Spatial-Audit','Spatial_Audit.wav'],['AudioEditor','AudioEditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
+      ['Baby laughter + keyboard', 'REM_M_1155', 'remove', 'A baby laughing happily from the left and typing on a computer keyboard from the right.', 'A baby laughing happily from the left.', 'Remove typing on a computer keyboard from the right.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
+      ['Keyboard + whistling', 'REM_M_117252', 'remove', 'A person typing on a keyboard from the left and rhythmic whistling playing a tune from the left.', 'A person typing on a keyboard from the left.', 'Remove rhythmic whistling playing a tune from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
+      ['Food sizzling + engine → ducks', 'REP_s_97541', 'replace', 'Food sizzling in a pan from the front, followed by an engine running from the left.', 'Food sizzling in a pan from the front, followed by ducks quacking from the right.', 'Replace an engine running from the left with ducks quacking from the right.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
+      ['Thunder + bell → crumpled paper', 'REP_t_111436', 'replace', 'Continuous low rumbling thunder from the left, followed by a cathedral bell ringing from the left.', 'Continuous low rumbling thunder from the left, followed by paper being crumpled from the left.', 'Replace a cathedral bell ringing from the left with paper being crumpled from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]]
+    ];
+    const mrsaudioCases = [
+      ['Triangle → toy train', 'real_05978', 'A triangle being struck from the right.', 'Add a toy train moving from the front.'],
+      ['Hand clapping → stick bell', 'real_13924', 'Hand clapping from the front.', 'Add the ringing sound of a stick bell from the right.'],
+      ['Clash cymbals → maracas', 'real_47153', 'Clash cymbals sounding from the front.', 'Add maracas being shaken from the left.']
+    ];
+    const overlapCases = [
+      ['Removal — long overlap', 'remove', 'A man chanting into a microphone from the right and continuous spray from the left.', 'A man chanting into a microphone from the right.', 'Remove continuous spray from the left.', 'groundtruth.wav'],
+      ['Replacement — overlapping events', 'replace', 'An audience gives applause from the left and an idle vehicle engine running from the right.', 'An audience gives applause from the left and a man is making a speech from the left.', 'Replace an idle vehicle engine running from the right with a man making a speech from the left.', 'groundtruth.wav']
+    ];
+    function esc(value) { return value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+    function card(label, path) { return `<div class="audio-card"><strong>${esc(label)}</strong><audio controls preload="none" src="${path}"></audio></div>`; }
+    function hrtfCard(item) {
+      const [title, id, task, source, target, instruction, files] = item;
+      const root = `HRTF_semantic_spatial/${task}/${id}`;
+      return `<article class="case"><h3>${esc(title)}</h3><div class="caption"><b>Source:</b> ${esc(source)}<br><b>Target:</b> ${esc(target)}<br><b>Instruction:</b> ${esc(instruction)}</div><div class="audio-grid">${files.map(([label,file]) => card(label, `${root}/${file}`)).join('')}</div></article>`;
+    }
+    function mrsaudioCard(item) {
+      const [title, id, source, instruction] = item;
+      const root = `MRSAudio/add/${id}`;
+      return `<article class="case"><h3>${esc(title)}</h3><div class="caption"><b>Source:</b> ${esc(source)}<br><b>Instruction:</b> ${esc(instruction)}</div><div class="audio-grid">${[['Real source','source.wav'],['Spatial-Audit','spatial_audit_edited.wav'],['SmartDJ','smartdj_edited.wav']].map(([label,file]) => card(label, `${root}/${file}`)).join('')}</div></article>`;
+    }
+    function overlapCard(item) {
+      const [title, id, source, target, instruction, reference] = item;
+      const root = `vary_overlap/${id}`;
+      return `<article class="case"><h3>${esc(title)}</h3><div class="caption"><b>Source:</b> ${esc(source)}<br><b>Target:</b> ${esc(target)}<br><b>Instruction:</b> ${esc(instruction)}</div><div class="audio-grid">${[['Source','source.wav'],['Target / reference',reference],['Spatial-Audit','spatial_audit.wav'],['SmartDJ','smartdj.wav']].map(([label,file]) => card(label, `${root}/${file}`)).join('')}</div></article>`;
+    }
+    document.querySelector('#hrtf').innerHTML = hrtfCases.map(hrtfCard).join('');
+    document.querySelector('#mrsaudio').innerHTML = mrsaudioCases.map(mrsaudioCard).join('');
+    document.querySelector('#overlap').innerHTML = overlapCases.map(overlapCard).join('');
+  </script>
+</body>
+</html>

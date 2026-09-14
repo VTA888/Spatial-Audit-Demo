@@ -1,0 +1,3 @@
+source_caption: Food sizzling in a pan from the front, followed by an engine running from the left.
+target_caption: Food sizzling in a pan from the front, followed by ducks quacking from the right.
+edit_instruction: Replace an engine running from the left with ducks quacking from the right.

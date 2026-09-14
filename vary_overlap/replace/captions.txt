@@ -1,0 +1,3 @@
+source_caption: An audience gives applause from the left and an idle vehicle engine running from the right.
+target_caption: An audience gives applause from the left and a man is making a speech from the left.
+edit_instruction: Replace an idle vehicle engine running from the right with a man making a speech from the left.

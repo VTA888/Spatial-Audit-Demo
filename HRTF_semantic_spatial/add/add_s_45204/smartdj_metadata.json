@@ -1,0 +1,18 @@
+{
+  "case": "add/add_s_45204",
+  "source_caption": "A clock ticking from the right.",
+  "target_caption": "A clock ticking from the right and a woman speaking from the left.",
+  "edit_instruction": "Add a woman speaking from the left.",
+  "smartdj_commands": [
+    "add the sound of a woman speaking at the left with 0 dB"
+  ],
+  "sample_rate": 24000,
+  "channels": 2,
+  "duration_seconds": 10.0,
+  "seed": 42,
+  "add_db": 0.0,
+  "guidance_scale": 4.0,
+  "guidance_rescale": 0.8,
+  "eta": 0.8,
+  "ddim_steps": 50
+}

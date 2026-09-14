@@ -1,0 +1,19 @@
+{
+  "case": "replace",
+  "source_caption": "An audience gives applause from the left and an idle vehicle engine running from the right.",
+  "target_caption": "An audience gives applause from the left and a man is making a speech from the left.",
+  "edit_instruction": "Replace an idle vehicle engine running from the right with a man making a speech from the left.",
+  "smartdj_commands": [
+    "remove the sound of an idle vehicle engine running at the right",
+    "add the sound of a man making a speech at the left with 0 dB"
+  ],
+  "sample_rate": 24000,
+  "channels": 2,
+  "duration_seconds": 10.0,
+  "seed": 42,
+  "add_db": 0.0,
+  "guidance_scale": 4.0,
+  "guidance_rescale": 0.8,
+  "eta": 0.8,
+  "ddim_steps": 50
+}

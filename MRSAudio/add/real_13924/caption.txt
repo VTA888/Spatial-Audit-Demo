@@ -1,0 +1,3 @@
+source_caption: Hand clapping from the front.
+target_caption: Hand clapping from the front and the ringing sound of a stick bell from the right.
+edit_instruction: Add the ringing sound of a stick bell from the right.

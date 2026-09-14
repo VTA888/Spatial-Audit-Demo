@@ -1,0 +1,18 @@
+{
+  "case": "remove",
+  "source_caption": "A man chanting into a microphone from the right and continuous spray from the left.",
+  "target_caption": "A man chanting into a microphone from the right.",
+  "edit_instruction": "Remove continuous spray from the left.",
+  "smartdj_commands": [
+    "remove the sound of continuous spray at the left"
+  ],
+  "sample_rate": 24000,
+  "channels": 2,
+  "duration_seconds": 10.0,
+  "seed": 42,
+  "add_db": 0.0,
+  "guidance_scale": 4.0,
+  "guidance_rescale": 0.8,
+  "eta": 0.8,
+  "ddim_steps": 50
+}

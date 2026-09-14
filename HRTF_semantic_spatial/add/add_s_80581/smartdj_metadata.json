@@ -1,0 +1,18 @@
+{
+  "case": "add/add_s_80581",
+  "source_caption": "A fast-flowing river from the right.",
+  "target_caption": "A fast-flowing river from the right and several goats bleating from the left.",
+  "edit_instruction": "Add several goats bleating from the left.",
+  "smartdj_commands": [
+    "add the sound of several goats bleating at the left with 0 dB"
+  ],
+  "sample_rate": 24000,
+  "channels": 2,
+  "duration_seconds": 10.0,
+  "seed": 42,
+  "add_db": 0.0,
+  "guidance_scale": 4.0,
+  "guidance_rescale": 0.8,
+  "eta": 0.8,
+  "ddim_steps": 50
+}

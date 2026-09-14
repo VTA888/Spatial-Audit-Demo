@@ -1,0 +1,2 @@
+step_1: remove the sound of an engine running at the left
+step_2: add the sound of ducks quacking at the right with 0 dB

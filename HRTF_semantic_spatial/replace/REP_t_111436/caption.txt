@@ -1,0 +1,3 @@
+source_caption: Continuous low rumbling thunder from the left, followed by a cathedral bell ringing from the left.
+target_caption: Continuous low rumbling thunder from the left, followed by paper being crumpled from the left.
+edit_instruction: Replace a cathedral bell ringing from the left with paper being crumpled from the left.

@@ -1,0 +1,3 @@
+source_caption: A person typing on a keyboard from the left and rhythmic whistling playing a tune from the left.
+target_caption: A person typing on a keyboard from the left.
+edit_instruction: Remove rhythmic whistling playing a tune from the left.

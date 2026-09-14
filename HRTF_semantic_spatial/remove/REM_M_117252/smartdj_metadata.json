@@ -1,0 +1,18 @@
+{
+  "case": "remove/REM_M_117252",
+  "source_caption": "A person typing on a keyboard from the left and rhythmic whistling playing a tune from the left.",
+  "target_caption": "A person typing on a keyboard from the left.",
+  "edit_instruction": "Remove rhythmic whistling playing a tune from the left.",
+  "smartdj_commands": [
+    "remove the sound of rhythmic whistling playing a tune at the left"
+  ],
+  "sample_rate": 24000,
+  "channels": 2,
+  "duration_seconds": 10.0,
+  "seed": 42,
+  "add_db": 0.0,
+  "guidance_scale": 4.0,
+  "guidance_rescale": 0.8,
+  "eta": 0.8,
+  "ddim_steps": 50
+}

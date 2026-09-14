@@ -1,0 +1,18 @@
+{
+  "case": "remove/REM_M_1155",
+  "source_caption": "A baby laughing happily from the left and typing on a computer keyboard from the right.",
+  "target_caption": "A baby laughing happily from the left.",
+  "edit_instruction": "Remove typing on a computer keyboard from the right.",
+  "smartdj_commands": [
+    "remove the sound of typing on a computer keyboard at the right"
+  ],
+  "sample_rate": 24000,
+  "channels": 2,
+  "duration_seconds": 10.0,
+  "seed": 42,
+  "add_db": 0.0,
+  "guidance_scale": 4.0,
+  "guidance_rescale": 0.8,
+  "eta": 0.8,
+  "ddim_steps": 50
+}

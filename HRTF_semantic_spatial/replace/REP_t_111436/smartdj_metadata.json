@@ -1,0 +1,19 @@
+{
+  "case": "replace/REP_t_111436",
+  "source_caption": "Continuous low rumbling thunder from the left, followed by a cathedral bell ringing from the left.",
+  "target_caption": "Continuous low rumbling thunder from the left, followed by paper being crumpled from the left.",
+  "edit_instruction": "Replace a cathedral bell ringing from the left with paper being crumpled from the left.",
+  "smartdj_commands": [
+    "remove the sound of a cathedral bell ringing at the left",
+    "add the sound of paper being crumpled at the left with 0 dB"
+  ],
+  "sample_rate": 24000,
+  "channels": 2,
+  "duration_seconds": 10.0,
+  "seed": 42,
+  "add_db": 0.0,
+  "guidance_scale": 4.0,
+  "guidance_rescale": 0.8,
+  "eta": 0.8,
+  "ddim_steps": 50
+}

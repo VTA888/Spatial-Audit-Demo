@@ -1,0 +1,2 @@
+step_1: remove the sound of a cathedral bell ringing at the left
+step_2: add the sound of paper being crumpled at the left with 0 dB

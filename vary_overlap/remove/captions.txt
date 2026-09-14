@@ -1,0 +1,3 @@
+source_caption: A man chanting into a microphone from the right and continuous spray from the left.
+target_caption: A man chanting into a microphone from the right.
+edit_instruction: Remove continuous spray from the left.

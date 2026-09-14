@@ -1,0 +1,3 @@
+source_caption: A baby laughing happily from the left and typing on a computer keyboard from the right.
+target_caption: A baby laughing happily from the left.
+edit_instruction: Remove typing on a computer keyboard from the right.

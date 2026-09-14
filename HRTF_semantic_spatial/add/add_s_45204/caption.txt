@@ -1,0 +1,3 @@
+source_caption: A clock ticking from the right.
+target_caption: A clock ticking from the right and a woman speaking from the left.
+edit_instruction: Add a woman speaking from the left.

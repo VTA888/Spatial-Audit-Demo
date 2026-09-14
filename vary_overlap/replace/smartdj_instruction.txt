@@ -1,0 +1,2 @@
+step_1: remove the sound of an idle vehicle engine running at the right
+step_2: add the sound of a man making a speech at the left with 0 dB

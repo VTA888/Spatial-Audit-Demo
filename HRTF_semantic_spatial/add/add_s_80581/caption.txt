@@ -1,0 +1,3 @@
+source_caption: A fast-flowing river from the right.
+target_caption: A fast-flowing river from the right and several goats bleating from the left.
+edit_instruction: Add several goats bleating from the left.

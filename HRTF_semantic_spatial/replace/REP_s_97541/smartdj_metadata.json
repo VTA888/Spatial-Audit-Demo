@@ -1,0 +1,19 @@
+{
+  "case": "replace/REP_s_97541",
+  "source_caption": "Food sizzling in a pan from the front, followed by an engine running from the left.",
+  "target_caption": "Food sizzling in a pan from the front, followed by ducks quacking from the right.",
+  "edit_instruction": "Replace an engine running from the left with ducks quacking from the right.",
+  "smartdj_commands": [
+    "remove the sound of an engine running at the left",
+    "add the sound of ducks quacking at the right with 0 dB"
+  ],
+  "sample_rate": 24000,
+  "channels": 2,
+  "duration_seconds": 10.0,
+  "seed": 42,
+  "add_db": 0.0,
+  "guidance_scale": 4.0,
+  "guidance_rescale": 0.8,
+  "eta": 0.8,
+  "ddim_steps": 50
+}

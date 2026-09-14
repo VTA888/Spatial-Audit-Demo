@@ -1,0 +1,3 @@
+source_caption: Clash cymbals sounding from the front.
+target_caption: Clash cymbals sounding from the front and maracas being shaken from the left.
+edit_instruction: Add maracas being shaken from the left.
