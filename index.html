@@ -60,7 +60,7 @@
     .hero-inner {
       max-width: 1050px;
       margin: 0 auto;
-      padding: 4.7rem 1.5rem 4.2rem;
+      padding: 3.8rem 1.5rem 3.4rem;
       text-align: center;
     }
 
@@ -74,13 +74,13 @@
     }
 
     h1 {
-      max-width: 1000px;
+      max-width: 920px;
       margin: 0 auto;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.15rem, 5vw, 3.85rem);
+      font-size: clamp(1.75rem, 3.3vw, 2.75rem);
       font-weight: 600;
       letter-spacing: -.025em;
-      line-height: 1.12;
+      line-height: 1.16;
     }
 
     .authors {
@@ -391,6 +391,10 @@
       gap: .65rem;
     }
 
+    .hrtf-audio-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
     .audio-card {
       padding: .7rem;
       background: #fff;
@@ -447,8 +451,12 @@
       font-weight: 700;
     }
 
+    @media (max-width: 980px) {
+      .hrtf-audio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
     @media (max-width: 760px) {
-      .hero-inner { padding: 3.4rem 1rem 3rem; }
+      .hero-inner { padding: 2.8rem 1rem 2.6rem; }
       .page-shell { width: min(100% - 1rem, 1180px); }
       .nav-inner { gap: .35rem; }
       .nav-link { justify-content: center; padding: .55rem .35rem; }
@@ -565,12 +573,12 @@
 
   <script>
     const hrtfCases = [
-      ['Clock + woman speaking', 'add_s_45204', 'add', 'A clock ticking from the right.', 'A clock ticking from the right and a woman speaking from the left.', 'Add a woman speaking from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
-      ['River + goats', 'add_s_80581', 'add', 'A fast-flowing river from the right.', 'A fast-flowing river from the right and several goats bleating from the left.', 'Add several goats bleating from the left.', [['Source','source.wav'],['Target / reference','ground_truth.wav'],['Spatial-Audit','Spatial_Audit.wav'],['AudioEditor','AudioEditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
-      ['Baby laughter + keyboard', 'REM_M_1155', 'remove', 'A baby laughing happily from the left and typing on a computer keyboard from the right.', 'A baby laughing happily from the left.', 'Remove typing on a computer keyboard from the right.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
-      ['Keyboard + whistling', 'REM_M_117252', 'remove', 'A person typing on a keyboard from the left and rhythmic whistling playing a tune from the left.', 'A person typing on a keyboard from the left.', 'Remove rhythmic whistling playing a tune from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
-      ['Food sizzling + engine → ducks', 'REP_s_97541', 'replace', 'Food sizzling in a pan from the front, followed by an engine running from the left.', 'Food sizzling in a pan from the front, followed by ducks quacking from the right.', 'Replace an engine running from the left with ducks quacking from the right.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
-      ['Thunder + bell → crumpled paper', 'REP_t_111436', 'replace', 'Continuous low rumbling thunder from the left, followed by a cathedral bell ringing from the left.', 'Continuous low rumbling thunder from the left, followed by paper being crumpled from the left.', 'Replace a cathedral bell ringing from the left with paper being crumpled from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]]
+      ['Clock + woman speaking', 'add_s_45204', 'add', 'A clock ticking from the right.', 'A clock ticking from the right and a woman speaking from the left.', 'Add a woman speaking from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav'],['Spatial-Audit','spatial_audit.wav']]],
+      ['River + goats', 'add_s_80581', 'add', 'A fast-flowing river from the right.', 'A fast-flowing river from the right and several goats bleating from the left.', 'Add several goats bleating from the left.', [['Source','source.wav'],['Target / reference','ground_truth.wav'],['AudioEditor','AudioEditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav'],['Spatial-Audit','Spatial_Audit.wav']]],
+      ['Baby laughter + keyboard', 'REM_M_1155', 'remove', 'A baby laughing happily from the left and typing on a computer keyboard from the right.', 'A baby laughing happily from the left.', 'Remove typing on a computer keyboard from the right.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav'],['Spatial-Audit','spatial_audit.wav']]],
+      ['Keyboard + whistling', 'REM_M_117252', 'remove', 'A person typing on a keyboard from the left and rhythmic whistling playing a tune from the left.', 'A person typing on a keyboard from the left.', 'Remove rhythmic whistling playing a tune from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav'],['Spatial-Audit','spatial_audit.wav']]],
+      ['Food sizzling + engine → ducks', 'REP_s_97541', 'replace', 'Food sizzling in a pan from the front, followed by an engine running from the left.', 'Food sizzling in a pan from the front, followed by ducks quacking from the right.', 'Replace an engine running from the left with ducks quacking from the right.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav'],['Spatial-Audit','spatial_audit.wav']]],
+      ['Thunder + bell → crumpled paper', 'REP_t_111436', 'replace', 'Continuous low rumbling thunder from the left, followed by a cathedral bell ringing from the left.', 'Continuous low rumbling thunder from the left, followed by paper being crumpled from the left.', 'Replace a cathedral bell ringing from the left with paper being crumpled from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav'],['Spatial-Audit','spatial_audit.wav']]]
     ];
 
     const mrsaudioCases = [
@@ -639,7 +647,7 @@
         <article class="case">
           <h4>${esc(title)}</h4>
           ${captionGrid(source, target, instruction)}
-          <div class="audio-grid">
+          <div class="audio-grid hrtf-audio-grid">
             ${files.map(([label, file]) => audioCard(label, `${root}/${file}`)).join('')}
           </div>
         </article>`;
@@ -663,10 +671,11 @@
     function mrsaudioCaseCard(item) {
       const [title, id, source, target, instruction] = item;
       const root = `MRSAudio/add/${id}`;
+      const spatialAuditFile = id === 'real_05978' ? 'Spatial_audit_edited.wav' : 'spatial_audit_edited.wav';
       const files = [
         ['Real source', 'source.wav'],
-        ['Spatial-Audit', 'spatial_audit_edited.wav'],
-        ['SmartDJ', 'smartdj_edited.wav']
+        ['SmartDJ', 'smartdj_edited.wav'],
+        ['Spatial-Audit', spatialAuditFile]
       ];
       return `
         <article class="case">
@@ -684,8 +693,8 @@
       const files = [
         ['Source', 'source.wav'],
         ['Target / reference', reference],
-        ['Spatial-Audit', 'spatial_audit.wav'],
-        ['SmartDJ', 'smartdj.wav']
+        ['SmartDJ', 'smartdj.wav'],
+        ['Spatial-Audit', 'spatial_audit.wav']
       ];
       return `
         <article class="case">

@@ -30,7 +30,7 @@ For the real-recorded examples there is no synthetic ground-truth target. The au
 
 ## 1. In-domain HRTF Data
 
-These examples compare the source mixture, the target/reference mixture, Spatial-Audit, AudioEditor, MMEdit, and SmartDJ. The target/reference waveform is the intended edited result for this synthetic setting.
+These examples compare the source mixture, the target/reference mixture, AudioEditor, MMEdit, SmartDJ, and Spatial-Audit. The target/reference waveform is the intended edited result for this synthetic setting.
 
 ### Add
 
@@ -45,10 +45,10 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 |---|---|
 | Source | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_45204/source.wav"></audio> |
 | Target / reference | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_45204/groundtruth.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_45204/spatial_audit.wav"></audio> |
 | AudioEditor | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_45204/audioeditor.wav"></audio> |
 | MMEdit | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_45204/mmedit.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_45204/smartdj.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_45204/spatial_audit.wav"></audio> |
 
 </details>
 
@@ -63,10 +63,10 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 |---|---|
 | Source | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_80581/source.wav"></audio> |
 | Target / reference | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_80581/ground_truth.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_80581/Spatial_Audit.wav"></audio> |
 | AudioEditor | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_80581/AudioEditor.wav"></audio> |
 | MMEdit | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_80581/mmedit.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_80581/smartdj.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/add/add_s_80581/Spatial_Audit.wav"></audio> |
 
 </details>
 
@@ -83,10 +83,10 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 |---|---|
 | Source | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_1155/source.wav"></audio> |
 | Target / reference | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_1155/groundtruth.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_1155/spatial_audit.wav"></audio> |
 | AudioEditor | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_1155/audioeditor.wav"></audio> |
 | MMEdit | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_1155/mmedit.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_1155/smartdj.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_1155/spatial_audit.wav"></audio> |
 
 </details>
 
@@ -101,10 +101,10 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 |---|---|
 | Source | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_117252/source.wav"></audio> |
 | Target / reference | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_117252/groundtruth.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_117252/spatial_audit.wav"></audio> |
 | AudioEditor | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_117252/audioeditor.wav"></audio> |
 | MMEdit | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_117252/mmedit.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_117252/smartdj.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/remove/REM_M_117252/spatial_audit.wav"></audio> |
 
 </details>
 
@@ -121,10 +121,10 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 |---|---|
 | Source | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_s_97541/source.wav"></audio> |
 | Target / reference | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_s_97541/groundtruth.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_s_97541/spatial_audit.wav"></audio> |
 | AudioEditor | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_s_97541/audioeditor.wav"></audio> |
 | MMEdit | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_s_97541/mmedit.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_s_97541/smartdj.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_s_97541/spatial_audit.wav"></audio> |
 
 </details>
 
@@ -139,10 +139,10 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 |---|---|
 | Source | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_t_111436/source.wav"></audio> |
 | Target / reference | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_t_111436/groundtruth.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_t_111436/spatial_audit.wav"></audio> |
 | AudioEditor | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_t_111436/audioeditor.wav"></audio> |
 | MMEdit | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_t_111436/mmedit.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_t_111436/smartdj.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="HRTF_semantic_spatial/replace/REP_t_111436/spatial_audit.wav"></audio> |
 
 </details>
 
@@ -158,8 +158,8 @@ These are independent 10-second binaural recordings from MRSAudio. Each source c
 | Audio | File |
 |---|---|
 | Real source | <audio controls preload="none" src="MRSAudio/add/real_05978/source.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="MRSAudio/add/real_05978/Spatial_audit_edited.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="MRSAudio/add/real_05978/smartdj_edited.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="MRSAudio/add/real_05978/Spatial_audit_edited.wav"></audio> |
 
 ### Hand clapping → stick bell
 
@@ -169,8 +169,8 @@ These are independent 10-second binaural recordings from MRSAudio. Each source c
 | Audio | File |
 |---|---|
 | Real source | <audio controls preload="none" src="MRSAudio/add/real_13924/source.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="MRSAudio/add/real_13924/spatial_audit_edited.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="MRSAudio/add/real_13924/smartdj_edited.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="MRSAudio/add/real_13924/spatial_audit_edited.wav"></audio> |
 
 ### Clash cymbals → maracas
 
@@ -180,8 +180,8 @@ These are independent 10-second binaural recordings from MRSAudio. Each source c
 | Audio | File |
 |---|---|
 | Real source | <audio controls preload="none" src="MRSAudio/add/real_47153/source.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="MRSAudio/add/real_47153/spatial_audit_edited.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="MRSAudio/add/real_47153/smartdj_edited.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="MRSAudio/add/real_47153/spatial_audit_edited.wav"></audio> |
 
 ## 3. Randomized Temporal Overlap Conditions
 
@@ -197,8 +197,8 @@ These cases use randomized onset times and overlap durations at inference time. 
 |---|---|
 | Source | <audio controls preload="none" src="vary_overlap/remove/source.wav"></audio> |
 | Target / reference | <audio controls preload="none" src="vary_overlap/remove/groundtruth.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="vary_overlap/remove/spatial_audit.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="vary_overlap/remove/smartdj.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="vary_overlap/remove/spatial_audit.wav"></audio> |
 
 ### Replacement — overlapping events
 
@@ -210,8 +210,8 @@ These cases use randomized onset times and overlap durations at inference time. 
 |---|---|
 | Source | <audio controls preload="none" src="vary_overlap/replace/source.wav"></audio> |
 | Target / reference | <audio controls preload="none" src="vary_overlap/replace/groundtruth.wav"></audio> |
-| Spatial-Audit | <audio controls preload="none" src="vary_overlap/replace/spatial_audit.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="vary_overlap/replace/smartdj.wav"></audio> |
+| Spatial-Audit | <audio controls preload="none" src="vary_overlap/replace/spatial_audit.wav"></audio> |
 
 ## Reproducibility notes
 
