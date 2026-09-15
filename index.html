@@ -3,53 +3,565 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Spatial-Audit Audio Editing Demo</title>
+  <meta name="description" content="Spatial-Audit qualitative audio editing examples on synthetic HRTF data, real-world MRSAudio recordings, and diverse temporal overlap conditions.">
+  <title>Spatial-Audit — Audio Editing Demo</title>
   <style>
-    :root { color-scheme: light; font-family: system-ui, -apple-system, sans-serif; }
-    body { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 4rem; color: #17202a; line-height: 1.5; }
-    h1 { margin-bottom: .3rem; }
-    h2 { margin-top: 2.4rem; border-bottom: 1px solid #d9e2ec; padding-bottom: .35rem; }
-    h3 { margin-top: 1.8rem; }
-    .lead { font-size: 1.08rem; color: #52606d; }
-    .notice { background: #f0f4f8; border-left: 4px solid #3e7cb1; padding: .8rem 1rem; }
-    .case { border: 1px solid #d9e2ec; border-radius: 8px; margin: 1rem 0; padding: 1rem; }
-    .case h3 { margin-top: 0; }
-    .caption { background: #f7f9fb; padding: .7rem; border-radius: 5px; }
-    .audio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: .75rem; }
-    .audio-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: .65rem; }
-    .audio-card strong { display: block; margin-bottom: .35rem; }
-    audio { width: 100%; }
-    code { background: #f1f5f9; padding: .1rem .25rem; border-radius: 3px; }
-    a { color: #1769aa; }
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5d6879;
+      --navy: #152d4f;
+      --navy-soft: #21456f;
+      --accent: #2d668f;
+      --paper: #ffffff;
+      --canvas: #f3f6f9;
+      --line: #dce3ea;
+      --line-strong: #c8d2dc;
+      --left: #8b3a4a;
+      --left-bg: #f8eaed;
+      --front: #365f91;
+      --front-bg: #eaf0f8;
+      --right: #2f6c62;
+      --right-bg: #e7f2ef;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-padding-top: 6.5rem; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(21, 45, 79, .025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(21, 45, 79, .025) 1px, transparent 1px),
+        var(--canvas);
+      background-size: 32px 32px;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .page-shell {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .hero {
+      color: #f8fbff;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(102, 158, 199, .28), transparent 32%),
+        linear-gradient(135deg, #10233d 0%, #18395d 68%, #214e70 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, .14);
+    }
+
+    .hero-inner {
+      max-width: 1050px;
+      margin: 0 auto;
+      padding: 4.7rem 1.5rem 4.2rem;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 1rem;
+      color: #b9d4e9;
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 1000px;
+      margin: 0 auto;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.15rem, 5vw, 3.85rem);
+      font-weight: 600;
+      letter-spacing: -.025em;
+      line-height: 1.12;
+    }
+
+    .authors {
+      margin: 1.6rem auto .7rem;
+      font-size: clamp(.98rem, 2vw, 1.16rem);
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+
+    .affiliations {
+      max-width: 900px;
+      margin: 0 auto;
+      color: #c9d7e4;
+      font-size: .82rem;
+      line-height: 1.65;
+    }
+
+    .topic-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .55rem;
+      margin-top: 1.65rem;
+    }
+
+    .topic {
+      padding: .34rem .7rem;
+      color: #dcebf6;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 999px;
+      font-size: .77rem;
+      font-weight: 650;
+      letter-spacing: .03em;
+    }
+
+    .section-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, .94);
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 6px 20px rgba(27, 44, 68, .06);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-inner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .75rem;
+      padding: .75rem 0;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      min-height: 3rem;
+      padding: .62rem .82rem;
+      color: #314156;
+      text-decoration: none;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      transition: border-color .16s ease, background .16s ease, transform .16s ease;
+    }
+
+    .nav-link:hover {
+      background: #eef4f8;
+      border-color: #9eb5c8;
+      transform: translateY(-1px);
+    }
+
+    .nav-index {
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+    }
+
+    .nav-copy {
+      font-size: .84rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    main { padding: 2.5rem 0 4.5rem; }
+
+    .intro-panel,
+    .section-block {
+      background: rgba(255, 255, 255, .96);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 12px 34px rgba(30, 50, 75, .055);
+    }
+
+    .intro-panel {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding: 1.55rem 1.7rem;
+    }
+
+    .intro-panel h2,
+    .section-heading h2,
+    .task-heading h3,
+    .case h4 {
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .intro-panel h2 {
+      margin: 0 0 .45rem;
+      color: var(--navy);
+      font-size: 1.35rem;
+    }
+
+    .intro-panel p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .listening-note {
+      padding-left: 1.35rem;
+      border-left: 1px solid var(--line);
+    }
+
+    .listening-note strong {
+      display: block;
+      margin-bottom: .3rem;
+      color: var(--navy);
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .direction-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .7rem;
+    }
+
+    .direction {
+      display: inline-block;
+      padding: .04rem .34rem;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+
+    .direction-left {
+      color: var(--left);
+      background: var(--left-bg);
+      border-color: #e8cbd2;
+    }
+
+    .direction-front {
+      color: var(--front);
+      background: var(--front-bg);
+      border-color: #cbd8e9;
+    }
+
+    .direction-right {
+      color: var(--right);
+      background: var(--right-bg);
+      border-color: #c4ded7;
+    }
+
+    .section-block {
+      margin-top: 2rem;
+      overflow: hidden;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.1rem;
+      padding: 1.55rem 1.7rem 1.4rem;
+      background: linear-gradient(90deg, #f8fafc, #ffffff);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-number {
+      display: grid;
+      width: 2.7rem;
+      height: 2.7rem;
+      place-items: center;
+      color: #fff;
+      background: var(--navy);
+      border-radius: 7px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.18rem;
+      font-weight: 700;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(1.45rem, 3vw, 1.9rem);
+      line-height: 1.25;
+    }
+
+    .section-heading p {
+      max-width: 900px;
+      margin: .4rem 0 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .section-content { padding: 1.6rem 1.7rem 1.8rem; }
+
+    .task-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin-bottom: 1.55rem;
+    }
+
+    .task-menu a {
+      padding: .48rem .85rem;
+      color: var(--navy-soft);
+      text-decoration: none;
+      background: #edf3f7;
+      border: 1px solid #d4e0e8;
+      border-radius: 6px;
+      font-size: .82rem;
+      font-weight: 750;
+    }
+
+    .task-group + .task-group {
+      margin-top: 2.4rem;
+      padding-top: 2.2rem;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .task-heading {
+      display: flex;
+      align-items: baseline;
+      gap: .75rem;
+      margin-bottom: 1rem;
+    }
+
+    .task-heading h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 1.45rem;
+    }
+
+    .task-tag {
+      color: #657286;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .01em;
+    }
+
+    .case {
+      padding: 1.25rem;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      box-shadow: 0 5px 18px rgba(28, 46, 70, .045);
+    }
+
+    .case + .case { margin-top: 1rem; }
+
+    .case h4 {
+      margin: 0 0 .85rem;
+      color: #203b5b;
+      font-size: 1.2rem;
+    }
+
+    .caption-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .6rem;
+      margin-bottom: 1rem;
+    }
+
+    .caption-item {
+      min-height: 100%;
+      padding: .7rem .78rem;
+      background: #f7f9fb;
+      border: 1px solid #e4e9ee;
+      border-radius: 6px;
+    }
+
+    .caption-label {
+      display: block;
+      margin-bottom: .25rem;
+      color: #687689;
+      font-size: .69rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .caption-item p {
+      margin: 0;
+      font-size: .88rem;
+      line-height: 1.55;
+    }
+
+    .audio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+      gap: .65rem;
+    }
+
+    .audio-card {
+      padding: .7rem;
+      background: #fff;
+      border: 1px solid #e1e7ec;
+      border-radius: 6px;
+    }
+
+    .audio-card.featured {
+      background: #f3f7fb;
+      border-color: #a9bfd1;
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+
+    .audio-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 1.4rem;
+      margin-bottom: .4rem;
+      color: #34465b;
+      font-size: .78rem;
+      font-weight: 750;
+    }
+
+    .method-badge {
+      color: #fff;
+      background: var(--accent);
+      border-radius: 999px;
+      padding: .1rem .4rem;
+      font-size: .61rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    audio {
+      display: block;
+      width: 100%;
+      height: 34px;
+    }
+
+    .footer {
+      margin-top: 2rem;
+      padding: 1.4rem 1.6rem;
+      color: #647184;
+      text-align: center;
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      font-size: .82rem;
+    }
+
+    .footer a {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      .hero-inner { padding: 3.4rem 1rem 3rem; }
+      .page-shell { width: min(100% - 1rem, 1180px); }
+      .nav-inner { gap: .35rem; }
+      .nav-link { justify-content: center; padding: .55rem .35rem; }
+      .nav-index { display: none; }
+      .nav-copy { font-size: .7rem; text-align: center; }
+      .intro-panel { grid-template-columns: 1fr; }
+      .listening-note { padding: 1rem 0 0; border-top: 1px solid var(--line); border-left: 0; }
+      .section-heading { padding: 1.25rem 1rem; }
+      .section-content { padding: 1.1rem 1rem 1.4rem; }
+      .caption-grid { grid-template-columns: 1fr; }
+      .audio-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <h1>Spatial-Audit Audio Editing Demo</h1>
-  <p class="lead">Qualitative examples for spatial-semantic audio editing with a spatially adapted TangoFlux backbone and training-free FlowEdit.</p>
-  <p class="notice">Use headphones. All examples are 10-second binaural clips. Captions describe locations with phrases such as <code>from the left</code>, <code>from the front</code>, and <code>from the right</code>.</p>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">Spatial-Audit · Audio Demonstration</p>
+      <h1>Beyond Semantics: Training-Free Spatial Audio Editing with Inversion-Free Flow Matching</h1>
+      <p class="authors">Xiaoran Yang<sup>1</sup>, Ningning Pan<sup>2</sup>, Yujin Wang<sup>1</sup>, Gongping Huang<sup>1*</sup>, Jingdong Chen<sup>1</sup>, and Jacob Benesty<sup>3</sup></p>
+      <p class="affiliations">
+        <sup>1</sup> School of Electronic Information, Wuhan University, China ·
+        <sup>2</sup> School of Computing and Artificial Intelligence, Southwestern University of Finance and Economics, China ·
+        <sup>3</sup> INRS-EMT, University of Quebec, Canada
+      </p>
+      <div class="topic-row" aria-label="Research topics">
+        <span class="topic">Binaural Audio</span>
+        <span class="topic">Flow Matching</span>
+        <span class="topic">Training-Free Editing</span>
+        <span class="topic">Spatial Semantics</span>
+      </div>
+    </div>
+  </header>
 
-  <h2>Evaluation settings</h2>
-  <p>This demo addresses three evaluation settings described in the revised manuscript: synthetic HRTF in-domain data, independent real-world MRSAudio recordings, and randomized temporal overlap conditions.</p>
+  <nav class="section-nav" aria-label="Demo sections">
+    <div class="page-shell nav-inner">
+      <a class="nav-link" href="#hrtf">
+        <span class="nav-index">01</span>
+        <span class="nav-copy">In-domain HRTF Data</span>
+      </a>
+      <a class="nav-link" href="#mrsaudio">
+        <span class="nav-index">02</span>
+        <span class="nav-copy">Real-world MRSAudio</span>
+      </a>
+      <a class="nav-link" href="#overlap">
+        <span class="nav-index">03</span>
+        <span class="nav-copy">Diverse Temporal Overlap</span>
+      </a>
+    </div>
+  </nav>
 
-  <h2>1. In-domain HRTF data</h2>
-  <p>Each case includes the source, target/reference, Spatial-Audit, AudioEditor, MMEdit, and SmartDJ outputs.</p>
-  <div id="hrtf"></div>
+  <main class="page-shell">
+    <section class="intro-panel" aria-labelledby="overview-title">
+      <div>
+        <h2 id="overview-title">Evaluation Overview</h2>
+        <p>This page presents representative qualitative examples requested during peer review: synthetic in-domain evaluation, independent real-recorded binaural audio, and unseen temporal-overlap configurations.</p>
+      </div>
+      <aside class="listening-note">
+        <strong>Listening note</strong>
+        <p>Use headphones. All examples are 10-second binaural clips.</p>
+        <div class="direction-legend" aria-label="Direction color legend">
+          <span class="direction direction-left">from the left</span>
+          <span class="direction direction-front">from the front</span>
+          <span class="direction direction-right">from the right</span>
+        </div>
+      </aside>
+    </section>
 
-  <h2>2. Real-world MRSAudio</h2>
-  <p>These single-source binaural recordings are independent of the AudioCaps/HRTF synthesis pipeline. They evaluate spatial addition without a synthetic ground-truth target.</p>
-  <div id="mrsaudio"></div>
+    <section class="section-block" id="hrtf">
+      <header class="section-heading">
+        <span class="section-number">01</span>
+        <div>
+          <h2>In-domain HRTF Data</h2>
+          <p>Examples from the synthetic HRTF-based evaluation pipeline, organized by editing operation and compared against paired references and established baselines.</p>
+        </div>
+      </header>
+      <div class="section-content">
+        <nav class="task-menu" aria-label="HRTF editing tasks">
+          <a href="#hrtf-add">Add</a>
+          <a href="#hrtf-remove">Remove</a>
+          <a href="#hrtf-replace">Replace</a>
+        </nav>
+        <div id="hrtf-groups"></div>
+      </div>
+    </section>
 
-  <h2>3. Diverse temporal overlap</h2>
-  <p>These examples use randomized event onset times and overlap durations. The replacement example contains approximately 3.2–7.7 seconds of source-event overlap, and the removal example approximately 0.8–8.2 seconds.</p>
-  <div id="overlap"></div>
+    <section class="section-block" id="mrsaudio">
+      <header class="section-heading">
+        <span class="section-number">02</span>
+        <div>
+          <h2>Independent Real-world MRSAudio Recordings</h2>
+          <p>Single-source, real-recorded binaural clips independent of the AudioCaps/HRTF synthesis pipeline. Because no synthetic target is available, Spatial-Audit and SmartDJ are compared directly on spatial addition.</p>
+        </div>
+      </header>
+      <div class="section-content" id="mrsaudio-cases"></div>
+    </section>
 
-  <h2>Notes</h2>
-  <ul>
-    <li>Spatial-Audit editing is training-free and uses source/target spatial-semantic captions.</li>
-    <li>SmartDJ prompts explicitly include the edited event direction.</li>
-    <li>Real-recorded examples have no synthetic target; listen to Spatial-Audit and SmartDJ directly.</li>
-  </ul>
-  <p><a href="README.md">Open the full GitHub-readable demo documentation</a></p>
+    <section class="section-block" id="overlap">
+      <header class="section-heading">
+        <span class="section-number">03</span>
+        <div>
+          <h2>Randomized Temporal Overlap Conditions</h2>
+          <p>Examples with randomized event onset times and overlap durations. The replacement case overlaps at approximately 3.2–7.7 s, while the removal case overlaps at approximately 0.8–8.2 s.</p>
+        </div>
+      </header>
+      <div class="section-content" id="overlap-cases"></div>
+    </section>
+
+    <footer class="footer">
+      Spatial-Audit uses a spatially adapted TangoFlux backbone with inversion-free FlowEdit. The editing stage is training-free.
+      <br><a href="README.md">View the repository documentation</a>
+    </footer>
+  </main>
 
   <script>
     const hrtfCases = [
@@ -60,35 +572,134 @@
       ['Food sizzling + engine → ducks', 'REP_s_97541', 'replace', 'Food sizzling in a pan from the front, followed by an engine running from the left.', 'Food sizzling in a pan from the front, followed by ducks quacking from the right.', 'Replace an engine running from the left with ducks quacking from the right.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]],
       ['Thunder + bell → crumpled paper', 'REP_t_111436', 'replace', 'Continuous low rumbling thunder from the left, followed by a cathedral bell ringing from the left.', 'Continuous low rumbling thunder from the left, followed by paper being crumpled from the left.', 'Replace a cathedral bell ringing from the left with paper being crumpled from the left.', [['Source','source.wav'],['Target / reference','groundtruth.wav'],['Spatial-Audit','spatial_audit.wav'],['AudioEditor','audioeditor.wav'],['MMEdit','mmedit.wav'],['SmartDJ','smartdj.wav']]]
     ];
+
     const mrsaudioCases = [
-      ['Triangle → toy train', 'real_05978', 'A triangle being struck from the right.', 'Add a toy train moving from the front.'],
-      ['Hand clapping → stick bell', 'real_13924', 'Hand clapping from the front.', 'Add the ringing sound of a stick bell from the right.'],
-      ['Clash cymbals → maracas', 'real_47153', 'Clash cymbals sounding from the front.', 'Add maracas being shaken from the left.']
+      ['Triangle → toy train', 'real_05978', 'A triangle being struck from the right.', 'A triangle being struck from the right and a toy train moving from the front.', 'Add a toy train moving from the front.'],
+      ['Hand clapping → stick bell', 'real_13924', 'Hand clapping from the front.', 'Hand clapping from the front and the ringing sound of a stick bell from the right.', 'Add the ringing sound of a stick bell from the right.'],
+      ['Clash cymbals → maracas', 'real_47153', 'Clash cymbals sounding from the front.', 'Clash cymbals sounding from the front and maracas being shaken from the left.', 'Add maracas being shaken from the left.']
     ];
+
     const overlapCases = [
       ['Removal — long overlap', 'remove', 'A man chanting into a microphone from the right and continuous spray from the left.', 'A man chanting into a microphone from the right.', 'Remove continuous spray from the left.', 'groundtruth.wav'],
       ['Replacement — overlapping events', 'replace', 'An audience gives applause from the left and an idle vehicle engine running from the right.', 'An audience gives applause from the left and a man is making a speech from the left.', 'Replace an idle vehicle engine running from the right with a man making a speech from the left.', 'groundtruth.wav']
     ];
-    function esc(value) { return value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
-    function card(label, path) { return `<div class="audio-card"><strong>${esc(label)}</strong><audio controls preload="none" src="${path}"></audio></div>`; }
-    function hrtfCard(item) {
+
+    const taskInfo = {
+      add: ['Add', 'Add a new spatial event while preserving the source scene.'],
+      remove: ['Remove', 'Remove a specified spatial event while retaining the remaining content.'],
+      replace: ['Replace', 'Replace one event with another while controlling the target direction.']
+    };
+
+    function esc(value) {
+      return value
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;');
+    }
+
+    function spatialText(value) {
+      return esc(value).replace(
+        /from the (left|front|right)/gi,
+        (phrase, direction) => `<span class="direction direction-${direction.toLowerCase()}">${phrase}</span>`
+      );
+    }
+
+    function audioCard(label, path) {
+      const featured = label === 'Spatial-Audit';
+      return `
+        <div class="audio-card${featured ? ' featured' : ''}">
+          <div class="audio-label">
+            <span>${esc(label)}</span>
+            ${featured ? '<span class="method-badge">Ours</span>' : ''}
+          </div>
+          <audio controls preload="none" src="${path}"></audio>
+        </div>`;
+    }
+
+    function captionGrid(source, target, instruction) {
+      const entries = [
+        ['Source caption', source],
+        ['Target caption', target],
+        ['Edit instruction', instruction]
+      ];
+      return `
+        <div class="caption-grid">
+          ${entries.map(([label, value]) => `
+            <div class="caption-item">
+              <span class="caption-label">${label}</span>
+              <p>${spatialText(value)}</p>
+            </div>`).join('')}
+        </div>`;
+    }
+
+    function hrtfCaseCard(item) {
       const [title, id, task, source, target, instruction, files] = item;
       const root = `HRTF_semantic_spatial/${task}/${id}`;
-      return `<article class="case"><h3>${esc(title)}</h3><div class="caption"><b>Source:</b> ${esc(source)}<br><b>Target:</b> ${esc(target)}<br><b>Instruction:</b> ${esc(instruction)}</div><div class="audio-grid">${files.map(([label,file]) => card(label, `${root}/${file}`)).join('')}</div></article>`;
+      return `
+        <article class="case">
+          <h4>${esc(title)}</h4>
+          ${captionGrid(source, target, instruction)}
+          <div class="audio-grid">
+            ${files.map(([label, file]) => audioCard(label, `${root}/${file}`)).join('')}
+          </div>
+        </article>`;
     }
-    function mrsaudioCard(item) {
-      const [title, id, source, instruction] = item;
+
+    function renderHrtfGroups() {
+      return ['add', 'remove', 'replace'].map(task => {
+        const [title, description] = taskInfo[task];
+        const cases = hrtfCases.filter(item => item[2] === task);
+        return `
+          <section class="task-group" id="hrtf-${task}">
+            <header class="task-heading">
+              <h3>${title}</h3>
+              <span class="task-tag">${description}</span>
+            </header>
+            ${cases.map(hrtfCaseCard).join('')}
+          </section>`;
+      }).join('');
+    }
+
+    function mrsaudioCaseCard(item) {
+      const [title, id, source, target, instruction] = item;
       const root = `MRSAudio/add/${id}`;
-      return `<article class="case"><h3>${esc(title)}</h3><div class="caption"><b>Source:</b> ${esc(source)}<br><b>Instruction:</b> ${esc(instruction)}</div><div class="audio-grid">${[['Real source','source.wav'],['Spatial-Audit','spatial_audit_edited.wav'],['SmartDJ','smartdj_edited.wav']].map(([label,file]) => card(label, `${root}/${file}`)).join('')}</div></article>`;
+      const files = [
+        ['Real source', 'source.wav'],
+        ['Spatial-Audit', 'spatial_audit_edited.wav'],
+        ['SmartDJ', 'smartdj_edited.wav']
+      ];
+      return `
+        <article class="case">
+          <h4>${esc(title)}</h4>
+          ${captionGrid(source, target, instruction)}
+          <div class="audio-grid">
+            ${files.map(([label, file]) => audioCard(label, `${root}/${file}`)).join('')}
+          </div>
+        </article>`;
     }
-    function overlapCard(item) {
+
+    function overlapCaseCard(item) {
       const [title, id, source, target, instruction, reference] = item;
       const root = `vary_overlap/${id}`;
-      return `<article class="case"><h3>${esc(title)}</h3><div class="caption"><b>Source:</b> ${esc(source)}<br><b>Target:</b> ${esc(target)}<br><b>Instruction:</b> ${esc(instruction)}</div><div class="audio-grid">${[['Source','source.wav'],['Target / reference',reference],['Spatial-Audit','spatial_audit.wav'],['SmartDJ','smartdj.wav']].map(([label,file]) => card(label, `${root}/${file}`)).join('')}</div></article>`;
+      const files = [
+        ['Source', 'source.wav'],
+        ['Target / reference', reference],
+        ['Spatial-Audit', 'spatial_audit.wav'],
+        ['SmartDJ', 'smartdj.wav']
+      ];
+      return `
+        <article class="case">
+          <h4>${esc(title)}</h4>
+          ${captionGrid(source, target, instruction)}
+          <div class="audio-grid">
+            ${files.map(([label, file]) => audioCard(label, `${root}/${file}`)).join('')}
+          </div>
+        </article>`;
     }
-    document.querySelector('#hrtf').innerHTML = hrtfCases.map(hrtfCard).join('');
-    document.querySelector('#mrsaudio').innerHTML = mrsaudioCases.map(mrsaudioCard).join('');
-    document.querySelector('#overlap').innerHTML = overlapCases.map(overlapCard).join('');
+
+    document.querySelector('#hrtf-groups').innerHTML = renderHrtfGroups();
+    document.querySelector('#mrsaudio-cases').innerHTML = mrsaudioCases.map(mrsaudioCaseCard).join('');
+    document.querySelector('#overlap-cases').innerHTML = overlapCases.map(overlapCaseCard).join('');
   </script>
 </body>
 </html>

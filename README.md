@@ -1,4 +1,12 @@
-# Spatial-Audit Audio Editing Demo
+# Beyond Semantics: Training-Free Spatial Audio Editing with Inversion-Free Flow Matching
+
+**Xiaoran Yang¹, Ningning Pan², Yujin Wang¹, Gongping Huang¹*, Jingdong Chen¹, and Jacob Benesty³**
+
+¹ School of Electronic Information, Wuhan University, China  
+² School of Computing and Artificial Intelligence, Southwestern University of Finance and Economics, China  
+³ INRS-EMT, University of Quebec, Canada
+
+## Audio Demo
 
 This page provides qualitative audio examples for **Spatial-Audit**, a training-free spatial-semantic audio editing framework built on a spatially adapted TangoFlux backbone and FlowEdit.
 
@@ -12,20 +20,26 @@ The revised evaluation addresses the reviewers' concerns in three complementary 
 2. **Real-world binaural recordings**: independent MRSAudio recordings, outside the AudioCaps/HRTF construction pipeline. These recordings contain a single source, so the examples use spatial addition.
 3. **Diverse temporal overlap**: examples with randomized event onset times and overlap durations, including replacement and removal cases that differ from the fixed training configuration.
 
+### Quick Navigation
+
+- [In-domain HRTF Data](#1-in-domain-hrtf-data)
+- [Independent Real-world MRSAudio Recordings](#2-independent-real-world-mrsaudio-recordings)
+- [Randomized Temporal Overlap Conditions](#3-randomized-temporal-overlap-conditions)
+
 For the real-recorded examples there is no synthetic ground-truth target. The audio is therefore intended for subjective comparison between Spatial-Audit and SmartDJ, as described in the revised manuscript.
 
-## 1. In-domain HRTF-semantic-spatial examples
+## 1. In-domain HRTF Data
 
 These examples compare the source mixture, the target/reference mixture, Spatial-Audit, AudioEditor, MMEdit, and SmartDJ. The target/reference waveform is the intended edited result for this synthetic setting.
 
-### Addition
+### Add
 
 <details>
 <summary><strong>Clock + woman speaking</strong> — add a left event</summary>
 
-**Source:** `A clock ticking from the right.`  
-**Target:** `A clock ticking from the right and a woman speaking from the left.`  
-**Instruction:** `Add a woman speaking from the left.`
+**Source:** A clock ticking **from the right**.  
+**Target:** A clock ticking **from the right** and a woman speaking **from the left**.  
+**Instruction:** Add a woman speaking **from the left**.
 
 | Audio | File |
 |---|---|
@@ -41,9 +55,9 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 <details>
 <summary><strong>River + goats</strong> — add a left event</summary>
 
-**Source:** `A fast-flowing river from the right.`  
-**Target:** `A fast-flowing river from the right and several goats bleating from the left.`  
-**Instruction:** `Add several goats bleating from the left.`
+**Source:** A fast-flowing river **from the right**.  
+**Target:** A fast-flowing river **from the right** and several goats bleating **from the left**.  
+**Instruction:** Add several goats bleating **from the left**.
 
 | Audio | File |
 |---|---|
@@ -56,14 +70,14 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 
 </details>
 
-### Removal
+### Remove
 
 <details>
 <summary><strong>Baby laughter + keyboard</strong> — remove the right event</summary>
 
-**Source:** `A baby laughing happily from the left and typing on a computer keyboard from the right.`  
-**Target:** `A baby laughing happily from the left.`  
-**Instruction:** `Remove typing on a computer keyboard from the right.`
+**Source:** A baby laughing happily **from the left** and typing on a computer keyboard **from the right**.  
+**Target:** A baby laughing happily **from the left**.  
+**Instruction:** Remove typing on a computer keyboard **from the right**.
 
 | Audio | File |
 |---|---|
@@ -79,9 +93,9 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 <details>
 <summary><strong>Keyboard + whistling</strong> — remove the left event</summary>
 
-**Source:** `A person typing on a keyboard from the left and rhythmic whistling playing a tune from the left.`  
-**Target:** `A person typing on a keyboard from the left.`  
-**Instruction:** `Remove rhythmic whistling playing a tune from the left.`
+**Source:** A person typing on a keyboard **from the left** and rhythmic whistling playing a tune **from the left**.  
+**Target:** A person typing on a keyboard **from the left**.  
+**Instruction:** Remove rhythmic whistling playing a tune **from the left**.
 
 | Audio | File |
 |---|---|
@@ -94,14 +108,14 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 
 </details>
 
-### Replacement
+### Replace
 
 <details>
 <summary><strong>Food sizzling + engine → ducks</strong> — replace left with right</summary>
 
-**Source:** `Food sizzling in a pan from the front, followed by an engine running from the left.`  
-**Target:** `Food sizzling in a pan from the front, followed by ducks quacking from the right.`  
-**Instruction:** `Replace an engine running from the left with ducks quacking from the right.`
+**Source:** Food sizzling in a pan **from the front**, followed by an engine running **from the left**.  
+**Target:** Food sizzling in a pan **from the front**, followed by ducks quacking **from the right**.  
+**Instruction:** Replace an engine running **from the left** with ducks quacking **from the right**.
 
 | Audio | File |
 |---|---|
@@ -117,9 +131,9 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 <details>
 <summary><strong>Thunder + bell → crumpled paper</strong> — replace a left event</summary>
 
-**Source:** `Continuous low rumbling thunder from the left, followed by a cathedral bell ringing from the left.`  
-**Target:** `Continuous low rumbling thunder from the left, followed by paper being crumpled from the left.`  
-**Instruction:** `Replace a cathedral bell ringing from the left with paper being crumpled from the left.`
+**Source:** Continuous low rumbling thunder **from the left**, followed by a cathedral bell ringing **from the left**.  
+**Target:** Continuous low rumbling thunder **from the left**, followed by paper being crumpled **from the left**.  
+**Instruction:** Replace a cathedral bell ringing **from the left** with paper being crumpled **from the left**.
 
 | Audio | File |
 |---|---|
@@ -132,14 +146,14 @@ These examples compare the source mixture, the target/reference mixture, Spatial
 
 </details>
 
-## 2. Real-world MRSAudio recordings
+## 2. Independent Real-world MRSAudio Recordings
 
 These are independent 10-second binaural recordings from MRSAudio. Each source contains one recorded event, so the task is spatial addition. There is no synthetic ground-truth target; Spatial-Audit and SmartDJ are provided for direct listening comparison.
 
 ### Triangle → toy train
 
-**Source:** `A triangle being struck from the right.`  
-**Instruction:** `Add a toy train moving from the front.`
+**Source:** A triangle being struck **from the right**.  
+**Instruction:** Add a toy train moving **from the front**.
 
 | Audio | File |
 |---|---|
@@ -149,8 +163,8 @@ These are independent 10-second binaural recordings from MRSAudio. Each source c
 
 ### Hand clapping → stick bell
 
-**Source:** `Hand clapping from the front.`  
-**Instruction:** `Add the ringing sound of a stick bell from the right.`
+**Source:** Hand clapping **from the front**.  
+**Instruction:** Add the ringing sound of a stick bell **from the right**.
 
 | Audio | File |
 |---|---|
@@ -160,8 +174,8 @@ These are independent 10-second binaural recordings from MRSAudio. Each source c
 
 ### Clash cymbals → maracas
 
-**Source:** `Clash cymbals sounding from the front.`  
-**Instruction:** `Add maracas being shaken from the left.`
+**Source:** Clash cymbals sounding **from the front**.  
+**Instruction:** Add maracas being shaken **from the left**.
 
 | Audio | File |
 |---|---|
@@ -169,15 +183,15 @@ These are independent 10-second binaural recordings from MRSAudio. Each source c
 | Spatial-Audit | <audio controls preload="none" src="MRSAudio/add/real_47153/spatial_audit_edited.wav"></audio> |
 | SmartDJ | <audio controls preload="none" src="MRSAudio/add/real_47153/smartdj_edited.wav"></audio> |
 
-## 3. Diverse temporal overlap
+## 3. Randomized Temporal Overlap Conditions
 
 These cases use randomized onset times and overlap durations at inference time. In the revised evaluation, the representative replacement case has approximately 3.2–7.7 seconds of source-event overlap, while the removal case has approximately 0.8–8.2 seconds. Addition is shown separately because its input contains only one event before editing.
 
 ### Removal — long overlap
 
-**Source:** `A man chanting into a microphone from the right and continuous spray from the left.`  
-**Target:** `A man chanting into a microphone from the right.`  
-**Instruction:** `Remove continuous spray from the left.`
+**Source:** A man chanting into a microphone **from the right** and continuous spray **from the left**.  
+**Target:** A man chanting into a microphone **from the right**.  
+**Instruction:** Remove continuous spray **from the left**.
 
 | Audio | File |
 |---|---|
@@ -188,9 +202,9 @@ These cases use randomized onset times and overlap durations at inference time. 
 
 ### Replacement — overlapping events
 
-**Source:** `An audience gives applause from the left and an idle vehicle engine running from the right.`  
-**Target:** `An audience gives applause from the left and a man is making a speech from the left.`  
-**Instruction:** `Replace an idle vehicle engine running from the right with a man making a speech from the left.`
+**Source:** An audience gives applause **from the left** and an idle vehicle engine running **from the right**.  
+**Target:** An audience gives applause **from the left** and a man is making a speech **from the left**.  
+**Instruction:** Replace an idle vehicle engine running **from the right** with a man making a speech **from the left**.
 
 | Audio | File |
 |---|---|
